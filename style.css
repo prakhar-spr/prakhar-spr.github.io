@@ -1,0 +1,48 @@
+.main_image {
+  position: absolute;
+
+  left: 50%;
+
+  top: 50%;
+
+  transform: translate(-50%, -50%);
+}
+
+.main_image main {
+  padding: 0;
+  display: block;
+  margin: 0 auto;
+  max-height: 50%;
+  max-width: 50%;
+}
+
+figcaption {
+  display: table-caption;
+  caption-side: top;
+}
+
+.sideBar {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+#cat {
+  width: 6rem;
+  height: 6rem;
+}
+
+.sideBar img {
+  width: 5rem;
+  height: 5rem;
+  object-fit: fill;
+  cursor: pointer;
+  margin: 0.5rem;
+}
+
+.blue {
+  background-color: blue;
+  width: 6rem;
+  height: 6rem;
+}
