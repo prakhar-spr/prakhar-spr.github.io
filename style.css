@@ -5,15 +5,10 @@
 
   top: 50%;
 
-  transform: translate(-50%, -50%);
-}
+  transform: translate(-30%, -50%);
 
-.main_image main {
-  padding: 0;
-  display: block;
-  margin: 0 auto;
-  max-height: 50%;
-  max-width: 50%;
+  max-width: 100 vw;
+  height: 100 vw;
 }
 
 figcaption {
@@ -21,28 +16,48 @@ figcaption {
   caption-side: top;
 }
 
+/*
 .sideBar {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   flex-wrap: wrap;
 }
-
-#cat {
-  width: 6rem;
-  height: 6rem;
-}
+*/
 
 .sideBar img {
   width: 5rem;
   height: 5rem;
   object-fit: fill;
   cursor: pointer;
-  margin: 0.5rem;
+  margin: 1.5rem;
+}
+
+.sideDiv {
+  display: grid;
+  grid-template-columns: 5rem auto;
+  grid-template-rows: auto;
+  grid-template-areas: repeat(5, ".thumb .desc");
+  column-gap: 40px;
+  row-gap: 50px;
+}
+
+p {
+  width: 5rem;
+  height: 5rem;
 }
 
 .blue {
   background-color: blue;
-  width: 6rem;
-  height: 6rem;
+  width: 30%;
+  height: fit-content;
+  color: azure;
+  /*height: 7vh;*/
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
 }
