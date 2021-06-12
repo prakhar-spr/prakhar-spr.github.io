@@ -29,6 +29,7 @@ const imgInfo = [
 let mainImg = document.querySelector(".main_image img");
 mainImg.setAttribute("id", "main");
 mainImg.setAttribute("src", imgInfo[0].previewImage); // initializing the main image to the first image of ImgInfo array.
+document.getElementById("mainFigCap").innerHTML = imgInfo[0].title;
 
 let iter = 0; // iterator for marking the current position of the element in ImgInfo array.
 
@@ -47,8 +48,23 @@ imgInfo.forEach((element) => {
   sideDiv.append(sideImg); // appending image to divison
   let sideCap = document.createElement("p"); // craeting paragraph to decribe the image caption
   sideCap.classList.add("desc");
-  sideCap.innerHTML = element.title;
+  let leftTitle = document.createElement("span");
+  let rightTitle = document.createElement("span");
+  leftTitle.innerHTML = element.title.substr(0, element.title.length / 2);
+  rightTitle.innerHTML = element.title.substring(
+    element.title.length / 2,
+    element.title.length
+  );
+  leftTitle.classList.add("leftTruncate");
+  rightTitle.classList.add("rightTruncate");
+  sideCap.append(leftTitle);
+  sideCap.append(rightTitle);
+  //sideCap.innerHTML = element.title;
   sideDiv.append(sideCap); // appending p tag to divison
+  sideDiv.setAttribute(
+    "onclick",
+    "change(this.firstChild.src, this.firstChild.id)"
+  );
   division.append(sideDiv); // appending the new divison to its parent divison.
   iter++;
 });
@@ -77,6 +93,7 @@ const change = (src, imgId) => {
   parent.classList.add("blue"); // add blue color class to the clicked image class
   //console.log(parent.id);
   document.getElementById("main").src = src; // replace main image by the clicked image
+  document.getElementById("mainFigCap").innerHTML = imgInfo[i].title;
 };
 
 // event listner created for capturing arrow movement on keyboard
@@ -87,6 +104,7 @@ window.addEventListener("keydown", (e) => {
       document.getElementById("main").src = sideBar[i + 1].src; //add src of next image to the main image src
       sideBarDiv[i + 1].classList.add("blue"); // add background color blue to the next division in sidebar
       sideBarDiv[i].classList.remove("blue"); // remove blue bg color from the current divison
+      document.getElementById("mainFigCap").innerHTML = imgInfo[i + 1].title;
       i++;
     }
   }
@@ -95,6 +113,7 @@ window.addEventListener("keydown", (e) => {
       document.getElementById("main").src = sideBar[i - 1].src; //add src of previous image to the main image src
       sideBarDiv[i - 1].classList.add("blue"); // add background color blue to the previous division in sidebar
       sideBarDiv[i].classList.remove("blue"); // remove blue bg color from the current divison
+      document.getElementById("mainFigCap").innerHTML = imgInfo[i - 1].title;
       i--;
     }
   }
