@@ -77,6 +77,34 @@ sideBarDiv = document.querySelectorAll(".sideBar div"); // List of all the divis
 
 sideBarDiv[0].classList.add("blue");
 
+//Function for truncating thumbnail title
+const clipper = () => {
+  let titleNode = document.querySelectorAll(".sideBar p");
+  let it = 0; // iterator for determining the index of array
+  titleNode.forEach((element) => {
+    let imgTitle = imgInfo[it].title;
+    element.textContent = imgTitle;
+    if (element.scrollWidth > element.clientWidth) {
+      let maxAllowed = Math.floor(
+        (element.clientWidth * imgTitle.length) / element.scrollWidth // Length of title that will fit inside the given size
+      );
+      maxAllowed -= 3; // subtracting three characters for putting dots
+      let newTitle = imgTitle.substr(0, maxAllowed / 2); // left side of the title
+      newTitle += "...";
+      newTitle += imgTitle.substr(
+        // right side of the title
+        imgTitle.length + 1 - maxAllowed / 2,
+        maxAllowed / 2
+      );
+      element.textContent = newTitle;
+    }
+    it++;
+  });
+};
+
+clipper(); // calling the clipper function for the first time
+window.addEventListener("resize", clipper); // calling this function whenever resizing.
+
 //function triggered on mouse click on image:
 const change = (src, imgId) => {
   let k = 0; // iterator to traverse the whole sidebar node list
@@ -119,29 +147,3 @@ window.addEventListener("keydown", (e) => {
     }
   }
 });
-
-//Function for truncating thumbnail titles
-const truncate = () => {
-  let titleNode = document.querySelectorAll(".sideBar p");
-  titleNode.forEach((element) => {
-    let imgTitle = element.innerHTML;
-    if (element.scrollWidth > element.clientWidth) {
-      let maxLength = Math.floor(
-        (element.clientWidth * element.innerHTML.length) / element.scrollWidth // Length of title that will fit inside the given size
-      );
-      maxLength -= 3; // subtracting three characters for putting dots
-      let newTitle = imgTitle.substr(0, maxLength / 2); // left side of the title
-      newTitle += "...";
-      newTitle += imgTitle.substr(
-        // right side of the title
-        imgTitle.length + 1 - maxLength / 2,
-        maxLength / 2
-      );
-      element.innerHTML = newTitle;
-    }
-  });
-};
-
-truncate(); // initializing truncate function
-
-window.addEventListener("resize", truncate); // calling this function whenever resizing.
