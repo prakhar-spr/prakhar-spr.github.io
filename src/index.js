@@ -83,14 +83,10 @@ function cartEdit(buttonId) {
 
 function editInCart(event) {
   let head = document.querySelector("#workflow");
-  if (form.elements.itemName.value !== selectedButton) {
-    localStorage.removeItem(selectedButton);
-    formB.textContent = "Edit";
-    form.removeEventListener("submit", editInCart);
-    location.reload();
-  } else {
-    localStorage.setItem(form.elements.itemName.value, form.quantity.value);
-  }
+  localStorage.removeItem(selectedButton);
+  localStorage.setItem(form.elements.itemName.value, form.quantity.value);
+  form.removeEventListener("submit", editInCart);
+  location.reload();
   head.textContent = "Add Item";
   formB.textContent = "Add";
 }
