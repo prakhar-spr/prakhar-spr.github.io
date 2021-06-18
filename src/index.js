@@ -82,6 +82,7 @@ function cartEdit(buttonId) {
 }
 
 function editInCart(event) {
+  let head = document.querySelector("#workflow");
   if (form.elements.itemName.value !== selectedButton) {
     localStorage.removeItem(selectedButton);
     formB.textContent = "Edit";
@@ -90,6 +91,8 @@ function editInCart(event) {
   } else {
     localStorage.setItem(form.elements.itemName.value, form.quantity.value);
   }
+  head.textContent = "Add Item";
+  formB.textContent = "Add";
 }
 
 function cartDelete(buttonId) {
