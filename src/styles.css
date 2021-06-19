@@ -7,6 +7,9 @@ body {
   padding: 0;
   margin: 0;
   /* background: black; */
+  background-color: #000000;
+  background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
+  /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 }
 
 #app {
@@ -18,21 +21,23 @@ body {
 
 .formBox {
   grid-column: 2 / 6;
-  /* background: white; */
   display: grid;
-  height: auto;
+  height: 43vh;
   grid-template-columns: 100%;
   grid-template-rows: 0.2fr 1fr;
   row-gap: 5vh;
-  /* border: 6px solid #b22222; */
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
-  /* background: rgb(250, 199, 155); */
+  border: solid #000;
+  border-width: 1px 1px;
+  background-color: #000000;
+  background-image: url("https://www.transparenttextures.com/patterns/debut-dark.png");
+  /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+  color: azure;
 }
 
 .cart {
-  /* background: lightcyan; */
-  grid-column: 8 / 12;
+  grid-column: 8 / 13;
   display: grid;
   /* grid-template-rows: max-content; */
   grid-auto-rows: min-content;
@@ -41,11 +46,12 @@ body {
   border: 0px;
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
-}
-
-.cart:nth-child(even) {
-  /* background: rgb(250, 244, 186); */
-  border: saddlebrown 2px;
+  border: solid #000;
+  border-width: 1px 1px;
+  background-color: #000000;
+  background-image: url("https://www.transparenttextures.com/patterns/debut-dark.png");
+  /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+  color: azure;
 }
 
 /* .cart:nth-child(odd) {
@@ -63,37 +69,57 @@ form {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 1fr 1fr;
-  row-gap: 30px;
+  row-gap: 2vh;
   margin: 0;
+}
+
+.inputForm {
+  display: flex;
+  flex-direction: column;
 }
 
 label {
   text-align: left;
-  margin: 0;
-  padding: 0;
+  margin-bottom: auto;
+  margin-top: auto;
+  padding-top: 3vh;
   height: 5vh;
+  font-family: fantasy, "Times New Roman", Times, serif;
   /* padding-top: 2.5vh;
   padding-bottom: 2.5vh;
   padding-top: 3vh; */
 }
 
-.inputForm {
-  display: grid;
-  grid-template-rows: 1fr 1fr;
+input {
+  height: 5vh;
+  border-radius: 5px;
+  border: solid rgb(35, 181, 201);
+  border-width: 1px 1px;
 }
-
-/* input {
-  height: 2.8vh;
-} */
 
 #formButton {
   /* margin-bottom: 70px 0; */
   /* height: inherit; */
-  width: 100%;
-  margin: 0 auto;
-  background: steelblue;
-  border: solid #000;
-  border-width: 2px 2px;
+  width: 40%;
+  height: 5vh;
+  /* border: solid #000;
+  border-radius: 5px;
+  border-width: 2px 2px; */
+  background: #000000;
+  margin-left: 60%;
+  align-self: baseline;
+  margin-top: 5vh;
+}
+
+#formButton {
+  border-color: #3498db;
+  color: #fff;
+  box-shadow: 0 0 40px 40px #3498db inset, 0 0 0 0 #3498db;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+}
+#formButton:hover {
+  box-shadow: 0 0 10px 0 #3498db inset, 0 0 10px 4px #3498db;
 }
 
 .cartDiv {
@@ -108,7 +134,7 @@ label {
   min-height: 30px;
   word-break: break-all;
   flex: 1 1 0;
-  padding: 0;
+  padding: 1vh;
   margin: 0;
   align-self: stretch;
   color: azure;
@@ -123,7 +149,7 @@ label {
   height: inherit;
   word-break: break-all;
   flex: 0.5 1 2vw;
-  padding: 0;
+  padding: 1vh;
   margin: 0;
   background: cornflowerblue;
   color: azure;
@@ -136,6 +162,11 @@ label {
 .cartQuantity {
   min-height: 30px;
   height: inherit;
+}
+
+h2 {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 30px;
 }
 
 .cartDel {
@@ -173,7 +204,8 @@ label {
     grid-template-columns: 100%;
     grid-template-rows: 0.2fr 1fr;
     row-gap: 5vh;
-    border-radius: 10px;
+    height: auto;
+    border-radius: 0px;
     box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
     overflow: auto;
   }
@@ -184,7 +216,7 @@ label {
     display: grid;
     /* grid-template-rows: max-content; */
     grid-auto-rows: min-content;
-
+    border-radius: 0px;
     /* border-radius: 10px;
     /* box-shadow: 10px 5px 5px black; */
     /* box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;  */
@@ -195,8 +227,19 @@ label {
     grid-template-rows: auto;
   }
 
-  #formbutton {
-    margin: 0 auto;
-    width: 100 vh;
+  #formButton {
+    height: 6vh;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  label {
+    padding-top: 3vh;
+  }
+}
+
+@media only screen and (max-height: 630px) {
+  label {
+    padding-top: 3px;
   }
 }

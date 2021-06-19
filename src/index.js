@@ -16,6 +16,7 @@ function render() {
     let newQuant = document.createElement("p");
     newQuant.classList.add("cartQuantity");
     newQuant.textContent = `X` + arrayOfValues[i];
+    newQuant.setAttribute("id", `${arrayOfKeys[i]}-quant`);
 
     let newEdit = document.createElement("button");
     newEdit.innerText = "Edit";
@@ -52,6 +53,7 @@ function addToCart(event) {
     let newQuant = document.createElement("p");
     newQuant.classList.add("cartQuantity");
     newQuant.textContent = `X` + form.elements.quantity.value;
+    newQuant.setAttribute("id", `${form.elements.itemName.value}-quant`);
 
     let newEdit = document.createElement("button");
     newEdit.innerText = "Edit";
@@ -75,11 +77,26 @@ function addToCart(event) {
     newItem.append(newEdit);
     newItem.append(newDel);
     cart.append(newItem);
+    localStorage.setItem(
+      form.elements.itemName.value,
+      form.elements.quantity.value
+    );
+  } else if (localStorage.getItem(form.elements.itemName.value) !== null) {
+    let quantUpdate = document.querySelector(
+      `#${form.elements.itemName.value}-quant`
+    );
+    let oldQuant = Number(
+      quantUpdate.textContent.substring(1, quantUpdate.textContent.length)
+    );
+    console.log(oldQuant);
+    quantUpdate.textContent = `X${
+      Number(form.elements.quantity.value) + oldQuant
+    }`;
+    localStorage.setItem(
+      form.elements.itemName.value,
+      Number(form.elements.quantity.value) + oldQuant
+    );
   }
-  localStorage.setItem(
-    form.elements.itemName.value,
-    form.elements.quantity.value
-  );
   event.preventDefault();
 }
 
@@ -92,6 +109,7 @@ function cartEdit(buttonId) {
   form.elements.quantity.value = localStorage.getItem(buttonId);
   selectedButton = buttonId;
   formB.textContent = "Edit";
+  form.removeEventListener("submit", addToCart);
   form.addEventListener("submit", editInCart);
 }
 
@@ -99,6 +117,7 @@ function editInCart(event) {
   let head = document.querySelector("#workflow");
   localStorage.removeItem(selectedButton);
   localStorage.setItem(form.elements.itemName.value, form.quantity.value);
+  // form.addEventListener("submit", addToCart);
   form.removeEventListener("submit", editInCart);
   location.reload();
   head.textContent = "Add Item";
