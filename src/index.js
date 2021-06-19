@@ -82,20 +82,26 @@ function addToCart(event) {
       form.elements.quantity.value
     );
   } else if (localStorage.getItem(form.elements.itemName.value) !== null) {
-    let quantUpdate = document.querySelector(
-      `#${form.elements.itemName.value}-quant`
-    );
-    let oldQuant = Number(
-      quantUpdate.textContent.substring(1, quantUpdate.textContent.length)
-    );
+    // let quantUpdate = document.querySelector(
+    //   `#${form.elements.itemName.value}-quant`
+    // );
+    // let oldQuant = Number(
+    //   quantUpdate.textContent.substring(1, quantUpdate.textContent.length)
+    // );
+    // console.log(oldQuant);
+    // quantUpdate.textContent = `X${
+    //   Number(form.elements.quantity.value) + oldQuant
+    // }`;
+    // localStorage.setItem(
+    //   form.elements.itemName.value,
+    //   Number(form.elements.quantity.value) + oldQuant
+    // );
+
+    let oldQuant = Number(localStorage.getItem(form.elements.itemName.value));
     console.log(oldQuant);
-    quantUpdate.textContent = `X${
-      Number(form.elements.quantity.value) + oldQuant
-    }`;
-    localStorage.setItem(
-      form.elements.itemName.value,
-      Number(form.elements.quantity.value) + oldQuant
-    );
+    oldQuant += Number(form.elements.quantity.value);
+    localStorage.setItem(form.elements.itemName.value, oldQuant);
+    location.reload();
   }
   event.preventDefault();
 }
