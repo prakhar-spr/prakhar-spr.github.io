@@ -6,11 +6,16 @@ render();
 
 function render() {
   var arrayOfKeys = Object.keys(localStorage);
+  var arrayOfValues = Object.values(localStorage);
   for (let i = 0; i < arrayOfKeys.length; i++) {
     let newItem = document.createElement("div");
     newItem.classList.add("cartDiv");
     let newDesc = document.createElement("p");
     newDesc.classList.add("cartPara");
+
+    let newQuant = document.createElement("p");
+    newQuant.classList.add("cartQuantity");
+    newQuant.textContent = `X` + arrayOfValues[i];
 
     let newEdit = document.createElement("button");
     newEdit.innerText = "Edit";
@@ -30,6 +35,7 @@ function render() {
     newDel.classList.add("cartDel");
 
     newItem.append(newDesc);
+    newItem.append(newQuant);
     newItem.append(newEdit);
     newItem.append(newDel);
     cart.append(newItem);
@@ -42,6 +48,10 @@ function addToCart(event) {
     newItem.classList.add("cartDiv");
     let newDesc = document.createElement("p");
     newDesc.classList.add("cartPara");
+
+    let newQuant = document.createElement("p");
+    newQuant.classList.add("cartQuantity");
+    newQuant.textContent = `X` + form.elements.quantity.value;
 
     let newEdit = document.createElement("button");
     newEdit.innerText = "Edit";
@@ -61,11 +71,15 @@ function addToCart(event) {
     newDel.classList.add("cartDel");
 
     newItem.append(newDesc);
+    newItem.append(newQuant);
     newItem.append(newEdit);
     newItem.append(newDel);
     cart.append(newItem);
   }
-  localStorage.setItem(form.elements.itemName.value, form.quantity.value);
+  localStorage.setItem(
+    form.elements.itemName.value,
+    form.elements.quantity.value
+  );
   event.preventDefault();
 }
 
