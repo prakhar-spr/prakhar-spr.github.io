@@ -22,7 +22,7 @@ body {
 .formBox {
   grid-column: 2 / 6;
   display: grid;
-  height: 43vh;
+  height: 44vh;
   grid-template-columns: 100%;
   grid-template-rows: 0.2fr 1fr;
   row-gap: 5vh;

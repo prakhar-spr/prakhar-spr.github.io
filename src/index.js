@@ -44,7 +44,10 @@ function render() {
 }
 
 function addToCart(event) {
-  if (localStorage.getItem(form.elements.itemName.value) === null) {
+  if (
+    localStorage.getItem(form.elements.itemName.value.trim()) === null &&
+    form.elements.quantity.value > 0
+  ) {
     let newItem = document.createElement("div");
     newItem.classList.add("cartDiv");
     let newDesc = document.createElement("p");
@@ -53,19 +56,19 @@ function addToCart(event) {
     let newQuant = document.createElement("p");
     newQuant.classList.add("cartQuantity");
     newQuant.textContent = `X` + form.elements.quantity.value;
-    newQuant.setAttribute("id", `${form.elements.itemName.value}-quant`);
+    newQuant.setAttribute("id", `${form.elements.itemName.value.trim()}-quant`);
 
     let newEdit = document.createElement("button");
     newEdit.innerText = "Edit";
-    newEdit.setAttribute("id", form.elements.itemName.value);
+    newEdit.setAttribute("id", form.elements.itemName.value.trim());
     newEdit.setAttribute("onclick", "cartEdit(this.id)");
-    newItem.setAttribute("id", `${form.elements.itemName.value}-div`);
+    newItem.setAttribute("id", `${form.elements.itemName.value.trim()}-div`);
 
     let newDel = document.createElement("button");
     newDel.innerText = "Delete";
     newDel.setAttribute("onclick", "cartDelete(this.previousSibling.id)");
 
-    newDesc.textContent = form.elements.itemName.value;
+    newDesc.textContent = form.elements.itemName.value.trim();
 
     newEdit.classList.add("cartButton");
     newDel.classList.add("cartButton");
@@ -78,10 +81,13 @@ function addToCart(event) {
     newItem.append(newDel);
     cart.append(newItem);
     localStorage.setItem(
-      form.elements.itemName.value,
+      form.elements.itemName.value.trim(),
       form.elements.quantity.value
     );
-  } else if (localStorage.getItem(form.elements.itemName.value) !== null) {
+  } else if (
+    localStorage.getItem(form.elements.itemName.value.trim()) !== null &&
+    form.elements.quantity.value > 0
+  ) {
     // let quantUpdate = document.querySelector(
     //   `#${form.elements.itemName.value}-quant`
     // );
@@ -97,10 +103,12 @@ function addToCart(event) {
     //   Number(form.elements.quantity.value) + oldQuant
     // );
 
-    let oldQuant = Number(localStorage.getItem(form.elements.itemName.value));
+    let oldQuant = Number(
+      localStorage.getItem(form.elements.itemName.value.trim())
+    );
     console.log(oldQuant);
     oldQuant += Number(form.elements.quantity.value);
-    localStorage.setItem(form.elements.itemName.value, oldQuant);
+    localStorage.setItem(form.elements.itemName.value.trim(), oldQuant);
     location.reload();
   }
   event.preventDefault();
@@ -122,7 +130,12 @@ function cartEdit(buttonId) {
 function editInCart(event) {
   let head = document.querySelector("#workflow");
   localStorage.removeItem(selectedButton);
-  localStorage.setItem(form.elements.itemName.value, form.quantity.value);
+  if (form.elements.quantity.value > 0) {
+    localStorage.setItem(
+      form.elements.itemName.value.trim(),
+      form.quantity.value
+    );
+  }
   // form.addEventListener("submit", addToCart);
   form.removeEventListener("submit", editInCart);
   location.reload();
