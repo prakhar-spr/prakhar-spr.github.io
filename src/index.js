@@ -138,7 +138,7 @@ function editInCart(event) {
   }
   // form.addEventListener("submit", addToCart);
   form.removeEventListener("submit", editInCart);
-  location.reload();
+  //location.reload();
   head.textContent = "Add Item";
   formB.textContent = "Add";
 }
